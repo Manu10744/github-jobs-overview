@@ -8,7 +8,8 @@ const ACTIONS = {
     UPDATE_HAS_NEXT_PAGE: 'update-has-next-page'
 }
 
-const BASE_URL = "https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json";
+// Proxy for https://jobs.github.com/positions.json to dodge CORS error
+const BASE_URL = "http://localhost:8010/proxy"
 
 /**
  * Dispatches the different actions that the app needs to handle.
@@ -21,11 +22,11 @@ function reducer(state, action) {
         case ACTIONS.MAKE_REQUEST:
             return { loading: true, jobs: [] };
         case ACTIONS.GET_DATA:
-            return {...state, loading: false, jobs: action.payload.jobs };
+            return { ...state, loading: false, jobs: action.payload.jobs };
         case ACTIONS.ERROR:
-            return {...state, loading: false, error: action.payload.error, jobs: [] };
+            return { ...state, loading: false, error: action.payload.error, jobs: [] };
         case ACTIONS.UPDATE_HAS_NEXT_PAGE:
-            return {...state, hasNextPage: action.payload.hasNextPage }
+            return { ...state, hasNextPage: action.payload.hasNextPage }
         default:
             return state;
     }
@@ -33,6 +34,7 @@ function reducer(state, action) {
 
 /**
  * Retrieves the jobs from the official GitHub Jobs API.
+ * Makes use of the dispatcher to take the right actions after querying the API.
  * 
  * @param {*} params List of API parameters
  * @param {*} page Page that we currently are on
@@ -58,7 +60,7 @@ export default function useFetchJobs(params, page) {
 
         const cancelToken2 = axios.CancelToken.source();
 
-        // Take a look if is one more page with results
+        // Take a look if is one more page with results so pagination works without errors
         axios.get(BASE_URL, {
             cancelToken: cancelToken2.token,
             params: { markdown: true, page: page + 1, ...params }

@@ -2,6 +2,10 @@ import React from 'react';
 import { Pagination } from 'react-bootstrap';
 
 export default function JobsPagination({page, setPage, hasNextPage }) {
+    /**
+     * Adjusts the current page index by a specifed amount, which can be positive or negative
+     * @param {*} amount The amount of pages that will be added / subtracted from the current value
+     */
     function adjustPage(amount) {
         setPage(prevPage => prevPage + amount);
     }
