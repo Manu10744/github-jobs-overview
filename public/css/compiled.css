@@ -55,6 +55,8 @@ body {
   border-radius: 5px;
   border: none;
   transition: background-color 0.4s ease;
+  display: flex;
+  align-items: center;
 }
 
 .btn-primary:hover {
