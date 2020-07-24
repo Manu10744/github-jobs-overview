@@ -5,6 +5,15 @@ import ReactMarkdown from 'react-markdown';
 export default function Job({ job }) {
     const [open, setOpen] = useState(false);
 
+    let today = new Date(),
+    createdOn = new Date(job.created_at),
+    msInDay   = 24 * 60 * 60 * 1000;
+
+    // Normalize the hours and calculate differenceInDays
+    today.setHours(0,0,0,0);
+    createdOn.setHours(0,0,0,0);
+    let differenceInDays = (today.getTime() - createdOn.getTime()) / msInDay
+
     return (
         <Card className="mb-3 box-shadow">
             <Card.Body>
@@ -14,7 +23,7 @@ export default function Job({ job }) {
                             {job.title} - <span className="text-muted font-weight-light">{job.company}</span>
                         </Card.Title>
                         <Card.Subtitle className="text-muted mb-2">
-                            {new Date(job.created_at).toLocaleDateString()}
+                            {new Date(job.created_at).toLocaleDateString()} - {differenceInDays} days ago
                         </Card.Subtitle>
                         <Badge variant="secondary" className="mr-2">{job.type}</Badge>
                         <Badge variant="secondary">{job.location}</Badge>
@@ -36,6 +45,7 @@ export default function Job({ job }) {
                         <ReactMarkdown source={job.description} />
                     </div>
                 </Collapse>
+                <p className="job-posting-origin">Posted by GitHub.</p>
             </Card.Body>
         </Card>
     )
