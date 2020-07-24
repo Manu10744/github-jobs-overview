@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
 $darkBlue: #274362;
+$headingFont: "Playfair Display";
 
 * {
     box-sizing: border-box;
@@ -27,6 +29,26 @@ body {
         font-size: 0.8em;
         color: #aaa;
         margin: 0;
+    }
+}
+
+.welcome-section {
+    text-align: center;
+    margin: 100px auto 50px auto;
+
+    h1 { 
+        font-family: $headingFont;
+        font-size: 5em;
+    }
+
+    p {
+        font-size: 1.5em;
+    }
+
+    .powered-by-info {
+        font-size: 1em;
+
+        .highlighted { font-weight: bold; }
     }
 }
 

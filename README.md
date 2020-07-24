@@ -1,5 +1,7 @@
 This is a React application that gives an overview of all the jobs that are posted in the GitHub Jobs API.
 
+## Preview:
+![Site Preview](./public/preview.JPG)
 ----------------------
 Auto-generated Documentation by React.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

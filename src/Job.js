@@ -32,11 +32,12 @@ export default function Job({ job }) {
                             {job.title} - <span className="text-muted font-weight-light">{job.company}</span>
                         </Card.Title>
                         <Card.Subtitle className="text-muted mb-2">
-                            {new Date(job.created_at).toLocaleDateString()} - {getDifferenceInDays(job.created_at)} days ago
+                            { getDifferenceInDays(job.created_at) > 0 && new Date(job.created_at).toLocaleDateString() + ` - ${getDifferenceInDays(job.created_at)} days ago ` }
+                            { getDifferenceInDays(job.created_at) === 0 && new Date(job.created_at).toLocaleDateString() +  " - Today" }
                         </Card.Subtitle>
                         <Badge variant="secondary" className="mr-2">{job.type}</Badge>
                         <Badge variant="secondary">
-                            <FontAwesomeIcon className="mr-2" icon={faMapMarkerAlt} size="md" />
+                            <FontAwesomeIcon className="mr-2" icon={faMapMarkerAlt} size="1x" />
                             {job.location}
                         </Badge>
                         <div className="my-2" style={{ wordBreak: 'break-all' }}>
@@ -48,7 +49,7 @@ export default function Job({ job }) {
                 <Card.Text>
                     <Button onClick={() => setOpen(prevOpen => !prevOpen)}
                             variant="primary">
-                            <FontAwesomeIcon className="mr-2" icon={faInfoCircle} size="md" /> {open ? 'Hide Details' : 'View Details'}
+                            <FontAwesomeIcon className="mr-2" icon={faInfoCircle} size="1x" /> {open ? 'Hide Details' : 'View Details'}
                     </Button>
                 </Card.Text>
 
